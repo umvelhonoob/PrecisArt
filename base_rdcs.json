@@ -1,0 +1,41 @@
+[
+  {
+    "id": "RDC429_2020",
+    "numero": "RDC Nº 429",
+    "orgao": "ANVISA",
+    "ano": 2020,
+    "data_publicacao": "09 de outubro de 2020",
+    "data_vigor": "09 de outubro de 2022",
+    "titulo": "Dispõe sobre a rotulagem nutricional dos alimentos embalados.",
+    "ementa": "Estabelece os requisitos para a rotulagem nutricional dos alimentos embalados, incluindo a declaração da tabela de informação nutricional, a rotulagem nutricional frontal (lupa) para alto conteúdo de açúcares adicionados, gordura saturada e sódio, e as regras para alegações nutricionais.",
+    "keywords": ["rotulagem nutricional", "alimentos embalados", "tabela nutricional", "rotulagem frontal", "lupa", "açúcares adicionados", "gordura saturada", "sódio", "alegações nutricionais", "anvisa"],
+    "link": "https://www.in.gov.br/en/web/dou/-/resolucao-de-diretoria-colegiada-rdc-n-429-de-8-de-outubro-de-2020-282070599",
+    "status": "Vigente"
+  },
+  {
+    "id": "PORTARIA249_2021",
+    "numero": "Portaria Nº 249",
+    "orgao": "INMETRO",
+    "ano": 2021,
+    "data_publicacao": "09 de junho de 2021",
+    "data_vigor": "02 de agosto de 2021",
+    "titulo": "Aprova o Regulamento Técnico Metrológico consolidado que estabelece a forma de expressar a indicação quantitativa do conteúdo líquido das mercadorias pré-embaladas.",
+    "ementa": "Define as regras para a indicação da quantidade (peso, volume, unidades) de produtos pré-medidos, incluindo o tamanho e local da informação na embalagem, unidades de medida a serem utilizadas e expressões permitidas. Consolida e revoga legislações anteriores sobre o tema, como a Portaria INMETRO nº 157/2002.",
+    "keywords": ["conteúdo líquido", "indicação quantitativa", "pré-embalados", "metrologia", "rotulagem", "peso líquido", "volume", "unidades", "inmetro", "embalagem"],
+    "link": "https://www.in.gov.br/en/web/dou/-/portaria-n-249-de-9-de-junho-de-2021-3253Portaria%20nº%20249,%20de%2009%20de%20junho%20de%202021.",
+    "status": "Vigente"
+  },
+  {
+    "id": "PORTARIA157_2002",
+    "numero": "Portaria Nº 157",
+    "orgao": "INMETRO",
+    "ano": 2002,
+    "data_publicacao": "19 de agosto de 2002",
+    "data_vigor": "Posterior a 180 dias da publicação",
+    "titulo": "Aprova o Regulamento Técnico Metrológico, estabelecendo a forma de expressar o conteúdo líquido a ser utilizado nos produtos pré-medidos.",
+    "ementa": "Estabelecia as regras para a indicação do conteúdo líquido em produtos pré-medidos, incluindo apresentação, unidades de medida e dimensões dos caracteres na rotulagem.",
+    "keywords": ["conteúdo líquido", "pré-medidos", "metrologia", "rotulagem", "inmetro", "histórico"],
+    "link": "Não aplicável (documento original fornecido)",
+    "status": "Revogada pela Portaria INMETRO nº 249/2021"
+  }
+]
