@@ -124,7 +124,11 @@
                 if (!response.ok) {
                     const errorText = await response.text(); 
                     console.error("Fetch response error text:", errorText);
-                    throw new Error(`Erro HTTP ${response.status} (${response.statusText}) ao buscar dados. Verifique a aba 'Rede' (Network) no console do navegador (F12) para detalhes da requisição.`);
+                    let specificError = `Erro HTTP ${response.status} (${response.statusText}) ao buscar dados.`;
+                    if (response.status === 429) {
+                        specificError = "Erro 429: Muitas requisições para o GitHub. O servidor limitou o acesso temporariamente. Por favor, aguarde e tente novamente mais tarde, ou considere hospedar o arquivo JSON em outro local se o problema persistir.";
+                    }
+                    throw new Error(specificError + " Verifique a aba 'Rede' (Network) no console do navegador (F12) para detalhes da requisição.");
                 }
                 
                 try {
@@ -132,9 +136,6 @@
                     console.log("Dados JSON parseados com sucesso:", rdcDatabase); 
                 } catch (jsonError) {
                     console.error("Erro ao parsear JSON:", jsonError);
-                    // Não podemos chamar response.text() aqui novamente se já foi consumido
-                    // Vamos assumir que errorText de cima (se response.ok fosse false) ou uma mensagem genérica
-                    // Se response.ok foi true mas o JSON é inválido, o jsonError terá a mensagem.
                     throw new Error(`Erro ao processar os dados recebidos (não é um JSON válido). Detalhes: ${jsonError.message}. Verifique o conteúdo do arquivo na URL.`);
                 }
 
@@ -153,10 +154,6 @@
                     displayErrorMessage = error.message;
                 } else if (error) {
                     displayErrorMessage = String(error);
-                }
-
-                 if (displayErrorMessage === "[object Object]" || displayErrorMessage.toLowerCase().includes("failed to fetch") || displayErrorMessage.toLowerCase().includes("networkerror") || displayErrorMessage.toLowerCase().includes("http") || displayErrorMessage.toLowerCase().includes("json")) {
-                    displayErrorMessage = `Não foi possível obter ou processar os dados: "${displayErrorMessage}". Verifique sua conexão com a internet, a URL e o conteúdo do arquivo JSON. Se estiver rodando este HTML localmente (protocolo file://), pode ser um problema de CORS; tente usar um servidor web local para testar. Consulte o console do navegador (F12), especialmente as abas 'Console' e 'Rede' (Network), para mais pistas técnicas.`;
                 }
                 
                 dataLoadingStatusDiv.textContent = `Erro ao carregar dados: ${displayErrorMessage}`;
@@ -187,9 +184,9 @@
         }
 
         function performSearch() {
-            console.log("performSearch() chamada."); // Log: Início da função
+            console.log("performSearch() chamada."); 
             const query = searchInput.value.trim().toLowerCase();
-            console.log("Termo da busca:", query); // Log: Termo da busca
+            console.log("Termo da busca:", query); 
             resultsContainer.innerHTML = '';
             searchNotification.style.display = 'none';
 
@@ -198,7 +195,7 @@
             searchButton.disabled = true;
 
             if (query === '') {
-                console.log("Busca vazia, exibindo notificação."); // Log: Busca vazia
+                console.log("Busca vazia, exibindo notificação."); 
                 searchNotification.textContent = 'Por favor, digite algo para buscar.';
                 searchNotification.className = 'notification bg-yellow-100 border-yellow-300 text-yellow-700 p-4';
                 searchNotification.style.display = 'block';
@@ -209,13 +206,12 @@
                 return;
             }
             
-            // Log para verificar o estado de rdcDatabase antes da busca
             console.log("Conteúdo de rdcDatabase antes de filtrar:", JSON.parse(JSON.stringify(rdcDatabase)));
 
             setTimeout(() => {
-                console.log("Dentro do setTimeout da busca."); // Log: Dentro do setTimeout
+                console.log("Dentro do setTimeout da busca."); 
                 const searchTerms = query.split(/\s+/).filter(term => term.length > 0);
-                console.log("Termos de busca processados:", searchTerms); // Log: Termos processados
+                console.log("Termos de busca processados:", searchTerms); 
 
                 if (!rdcDatabase || rdcDatabase.length === 0) {
                     console.error("ERRO: rdcDatabase está vazio ou indefinido no momento da filtragem!");
@@ -238,10 +234,10 @@
                     `;
                     return searchTerms.every(term => searchableText.includes(term));
                 });
-                console.log("Resultados encontrados:", foundResults); // Log: Resultados encontrados
+                console.log("Resultados encontrados:", foundResults); 
 
                 if (foundResults.length > 0) {
-                    console.log("Exibindo resultados encontrados."); // Log: Exibindo resultados
+                    console.log("Exibindo resultados encontrados."); 
                     foundResults.forEach(rdc => {
                         const statusClass = rdc.status === 'Vigente' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold';
                         const resultElement = `
@@ -258,7 +254,7 @@
                         resultsContainer.innerHTML += resultElement;
                     });
                 } else {
-                    console.log("Nenhum resultado encontrado, exibindo mensagem."); // Log: Nenhum resultado
+                    console.log("Nenhum resultado encontrado, exibindo mensagem."); 
                     resultsContainer.innerHTML = `<p class="text-gray-500">Nenhum resultado encontrado para "${searchInput.value.trim()}". Tente termos diferentes ou mais gerais.</p>`;
                 }
                 searchNotification.style.display = 'none';
